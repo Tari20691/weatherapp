@@ -1,42 +1,56 @@
 function search(event) {
-    event.preventDefault();
-    let searchInputElement = document.querySelector("#search-input");
-    let cityElement = document.querySelector("#current-city");
-    cityElement.innerHTML = searchInputElement.value;
+  event.preventDefault();
+  let searchInput = document.querySelector("#city");
+  console.log(searchInput.value);
+
+  let h3 = document.querySelector("h3");
+  if (searchInput.value) {
+    h3.innerHTML = `${searchInput.value}`;
+
+    // Call the API with the user-provided city
+    let city = searchInput.value;
+    let apiKey = "o1b51294bd100044e1tab17f08833d34";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+    axios.get(apiUrl).then(displayTemperature);
+  } else {
+    h3.innerHTML = null;
+    alert("Please name a city");
   }
-  
-  function formatDate(date) {
-    let minutes = date.getMinutes();
-    let hours = date.getHours();
-    let day = date.getDay();
-  
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-  
-    if (hours < 10) {
-      hours = `0${hours}`;
-    }
-  
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-  
-    let formattedDay = days[day];
-    return `${formattedDay} ${hours}:${minutes}`;
-  }
-  
-  let searchForm = document.querySelector("#search-form");
-  searchForm.addEventListener("submit", search);
-  
-  let currentDateELement = document.querySelector("#current-date");
+}
+
+let form = document.querySelector("#city-search");
+form.addEventListener("submit", search);
+
+setInterval(function () {
   let currentDate = new Date();
-  
-  currentDateELement.innerHTML = formatDate(currentDate);
-  
+  formDate(currentDate);
+}, 1000);
+
+function formDate(date) {
+  let h4 = document.querySelector("h4"); //we want to change the H3 of the page
+  let day = date.getDay();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ]; //weil sonst bei day nur zahlen stehen würde und dann ab 0 beginnend
+  let formattedDay = days[day];
+  h4.innerHTML = `, ${formattedDay} ${hours}:${minutes};`;
+}
+function displayTemperature(response) {
+  let temperature = Math.round(response.data.temperature.current);
+  let city2 = response.data.city;
+  let temperatureElement = document.querySelector("#temperatureNow");
+  temperatureElement.innerHTML = `${temperature}°C`;
+}
+let city2 = "Berlin";
+let apiKey = "o1b51294bd100044e1tab17f08833d34";
+let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city2}&key=${apiKey}`;
+axios.get(apiUrl).then(displayTemperature);

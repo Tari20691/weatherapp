@@ -1,56 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Weather App</title>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script> 
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="src/style.css" />
-    <title>My weather application</title>
+    <link href="src/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div class="weather-app">
-      <header>
-        <form id="search-form">
-          <input
-            type="search"
-            placeholder="Enter a city.."
-            required
-            class="search-input"
-            id="search-input"
-          />
-          <input type="submit" value="Search" class="search-button" />
-        </form>
-      </header>
-      <main>
-        <div class="current-weather">
-          <div>
-            <h1 class="current-city" id="current-city">Paris</h1>
-            <p class="current-details">
-              <span id="current-date"></span>, moderate rain <br />
-              Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
-            </p>
-          </div>
-          <div class="current-temperature">
-            <span class="current-temperature-icon">☀️</span
-            ><span class="current-temperature-value">24</span
-            ><span class="current-temperature-unit">°C</span>
+    <div class="container">
+      <br />
+      <h1>Today's Weather 🌡</h1>
+      <br />
+      <div class="row">
+        <div class="col-3" id="berlin">
+          <a
+            class="berlin"
+            href="https://www.wetter.com/wetter_aktuell/wettervorhersage/16_tagesvorhersage/deutschland/berlin/DE0001020.html"
+            target="_blank"
+            >Berlin</a
+          >
+        </div>
+        <div class="col-3" id="rome">
+          <a
+            class="rome"
+            href="https://www.wetter.com/wetter_aktuell/wettervorhersage/16_tagesvorhersage/italien/rom/IT0LA0153.html"
+            target="_blank"
+            >Rome</a
+          >
+        </div>
+        <div class="col-3" id="delhi">
+          <a
+            class="delhi"
+            href="https://www.wetter.com/wetter_aktuell/wettervorhersage/16_tagesvorhersage/indien/neu-delhi/IN0DL0002.html"
+            target="_blank"
+            >Delhi</a
+          >
+        </div>
+        <div class="col-3" id="canberra">
+          <a
+            class="canberra"
+            href="https://www.wetter.com/australien/canberra/AU0CT0001.html"
+            target="_blank"
+            >Canberra</a
+          >
+        </div>
+      </div>
+      <form action="submit" id="city-search">
+        <div class="row">
+          <div class="col-4">
+            <input
+              type="text"
+              size="50"
+              accept="text/*"
+              style="height: 30px;"
+              placeholder="What city are you looking for? 🔍"
+              name="city"
+              id="city"
+              autocomplete="off"
+              autofocus="on"
+              required
+            />
+                     </div>
+          <div class="col-2" id="location">
+            <input type="submit" value="Your location" />
           </div>
         </div>
-      </main>
-      <footer>
-        <p>
-          This project was coded by
-          <a href="#" target="_blank">Matt Delac</a> and is
-          <a href="#" target="_blank"> on GitHub</a> and
-          <a href="#" target="_blank">hosted on Netlify</a>
-        </p>
-      </footer>
+      </form>
+      <br />
+      <br />
+      
+            <p class="chosenCity">
+        <span class="weatherStatus"><h3>Choose your City</h3><h4>, Friday, 11:11 am CEST;</span>
+      </p>
+    
+    </h4>
+      <div class="row">
+        <div class="col-2" id="actualWeather">
+          🌦
+        </div>
+        <div class="col" id="temperatureNow">
+          #
+          <div class="row2" name="precipitation">Precipitation: 90%</div>
+          <div class="row3" name="wind">Wind: 8km/h</div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="row align-items-start">
+        <div class="col">Saturday</div>
+        <div class="col">Sunday</div>
+        <div class="col">Monday</div>
+        <div class="col">Tuesday</div>
+        <div class="col">Wednesday</div>
+        <div class="col">Thursday</div>
+      </div>
+      <div class="row align-items-start">
+        <div class="col" style="font-size: 40px;">☀</div>
+        <div class="col" style="font-size: 40px;">❄</div>
+        <div class="col" style="font-size: 40px;">⛈</div>
+        <div class="col" style="font-size: 40px;">🌨</div>
+        <div class="col" style="font-size: 40px;">🌤</div>
+        <div class="col" style="font-size: 40px;">☀</div>
+      </div>
+      <div class="row align-items-start">
+        <div class="col">30°C/<a href="" class="fahrenheitWeekdays">F</a></div>
+        <div class="col">-8°C/<a href="" class="fahrenheitWeekdays">F</a></div>
+        <div class="col">10°C/<a href="" class="fahrenheitWeekdays">F</a></div>
+        <div class="col">-1°C/<a href="" class="fahrenheitWeekdays">F</a></div>
+        <div class="col">18°C/<a href="" class="fahrenheitWeekdays">F</a></div>
+        <div class="col">36°C/<a href="" class="fahrenheitWeekdays">F</a></div>
+      </div>
     </div>
+    <script src="src/script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-CVJd7opzxu8zVYr+ka6TK2QPFaA5c9dyPjLLZ+aV+10Pjyyyy8U5vyqj1r6m6biJ"
+      crossorigin="anonymous"
+    ></script>
   </body>
-  <script src="src/script.js"></script>
 </html>
